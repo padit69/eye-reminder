@@ -14,14 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
-      
       - name: Show environment
         run: |
           echo "PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
           echo "Branch: ${{ github.head_ref }}"
           xcodebuild -version
+          xcode-select -p
       
       - name: Build check
         id: build
@@ -63,8 +61,8 @@ jobs:
             
             **Build Details:**
             - Configuration: Debug
-            - Xcode: 15.2
             - macOS: Latest
+            - Xcode: Default version
             
             [View full build logs](${context.payload.pull_request.html_url}/checks)
             `;
