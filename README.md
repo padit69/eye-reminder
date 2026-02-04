@@ -65,10 +65,29 @@ This helps reduce eye strain from extended screen time.
 3. Select your development team in the project settings
 4. Build and run (⌘R)
 
+**Using Scripts (Recommended):**
+
 ```bash
-cd /Users/dungne/SourceCode/eye-reminder/EyeReminder
+# Test build
+./scripts/test-build.sh
+
+# Create DMG installer
+./scripts/create-dmg.sh 1.0.0
+```
+
+**Using Xcode directly:**
+
+```bash
+cd EyeReminder
 xcodebuild -project EyeReminder.xcodeproj -scheme EyeReminder -configuration Release build
 ```
+
+### Creating Releases
+
+For automated releases with GitHub Actions, see:
+- 📖 [Release Guide](RELEASE.md) - Quick reference for creating releases
+- 📖 [GitHub Actions Setup](GITHUB_ACTIONS_SETUP.md) - Detailed CI/CD documentation
+- 🚀 [Release Scripts](scripts/README.md) - Helper scripts for building and releasing
 
 ## Architecture
 
