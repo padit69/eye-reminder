@@ -55,9 +55,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.accessory)
     }
     
+    @MainActor
     func setupObservers() {
         guard let appState = appState, 
-              let timerManager = timerManager,
               let multiReminderManager = multiReminderManager else { return }
         
         // Observe reminder state changes
