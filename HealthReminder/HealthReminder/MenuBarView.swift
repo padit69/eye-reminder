@@ -147,29 +147,45 @@ struct MenuBarView: View {
     }
     
     private func openSettingsWindow() {
-        // Try to find existing Settings window first
-        if let existingWindow = NSApp.windows.first(where: { $0.title == "Settings" }) {
-            NSApp.activate(ignoringOtherApps: true)
-            existingWindow.makeKeyAndOrderFront(nil)
-        } else {
-            // Create new settings window
-            let settingsView = SettingsView(appState: appState, timerManager: timerManager)
-            let hostingController = NSHostingController(rootView: settingsView)
-            
-            let window = NSWindow(contentViewController: hostingController)
-            window.title = "Settings"
-            window.styleMask = [.titled, .closable]
-            window.setContentSize(NSSize(width: 700, height: 500))
-            window.center()
-            window.isReleasedWhenClosed = false
-            window.titlebarAppearsTransparent = false
-            window.backgroundColor = NSColor.windowBackgroundColor
-            
-            NSApp.activate(ignoringOtherApps: true)
-            window.makeKeyAndOrderFront(nil)
-            
-            // Store reference to keep window alive
-            SettingsWindowManager.shared.settingsWindow = window
+        // Close the menu bar popover first
+        closeMenuBarPopover()
+        
+        // Small delay to ensure popover closes before opening settings
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            // Try to find existing Settings window first
+            if let existingWindow = NSApp.windows.first(where: { $0.title == "Settings" }) {
+                NSApp.activate(ignoringOtherApps: true)
+                existingWindow.makeKeyAndOrderFront(nil)
+            } else {
+                // Create new settings window
+                let settingsView = SettingsView(appState: appState, timerManager: timerManager)
+                let hostingController = NSHostingController(rootView: settingsView)
+                
+                let window = NSWindow(contentViewController: hostingController)
+                window.title = "Settings"
+                window.styleMask = [.titled, .closable]
+                window.setContentSize(NSSize(width: 700, height: 500))
+                window.center()
+                window.isReleasedWhenClosed = false
+                window.titlebarAppearsTransparent = false
+                window.backgroundColor = NSColor.windowBackgroundColor
+                
+                NSApp.activate(ignoringOtherApps: true)
+                window.makeKeyAndOrderFront(nil)
+                
+                // Store reference to keep window alive
+                SettingsWindowManager.shared.settingsWindow = window
+            }
+        }
+    }
+    
+    private func closeMenuBarPopover() {
+        // Find and close the menu bar popover window
+        for window in NSApp.windows {
+            if window.level == .popUpMenu {
+                window.close()
+                break
+            }
         }
     }
 }
