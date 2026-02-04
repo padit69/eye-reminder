@@ -14,22 +14,33 @@ class SingleReminderTimer: ObservableObject {
     let type: ReminderType
     @Published var timeRemaining: Int = 0
     @Published var isEnabled: Bool = true
+    @Published var isPaused: Bool = false
     
     private var timer: Timer?
     private let appState: AppState
+    private weak var manager: MultiReminderManager?
     
-    init(type: ReminderType, appState: AppState) {
+    init(type: ReminderType, appState: AppState, manager: MultiReminderManager? = nil) {
         self.type = type
         self.appState = appState
+        self.manager = manager
         self.isEnabled = appState.settings.settings(for: type).enabled
+    }
+    
+    func setManager(_ manager: MultiReminderManager) {
+        self.manager = manager
     }
     
     func start() {
         guard isEnabled else { return }
         
-        let settings = appState.settings.settings(for: type)
-        timeRemaining = settings.intervalMinutes * 60
+        // If starting fresh (not resuming), reset time
+        if timeRemaining == 0 {
+            let settings = appState.settings.settings(for: type)
+            timeRemaining = settings.intervalMinutes * 60
+        }
         
+        isPaused = false
         timer?.invalidate()
         
         // Schedule timer on main run loop to avoid threading issues
@@ -51,7 +62,15 @@ class SingleReminderTimer: ObservableObject {
         RunLoop.main.add(timer!, forMode: .common)
     }
     
+    func pause() {
+        isPaused = true
+        timer?.invalidate()
+        timer = nil
+        // Keep timeRemaining value for resume
+    }
+    
     func stop() {
+        isPaused = false
         timer?.invalidate()
         timer = nil
         timeRemaining = 0
@@ -63,6 +82,11 @@ class SingleReminderTimer: ObservableObject {
     }
     
     private func trigger() {
+        // Check if manager is still running before triggering
+        guard let manager = manager, manager.isRunning else {
+            return
+        }
+        
         appState.showReminder(type: type)
         // Restart timer for next reminder
         start()
@@ -84,11 +108,21 @@ class MultiReminderManager: ObservableObject {
     
     private let appState: AppState
     
+    // Computed property to check if any timer is paused
+    var isPaused: Bool {
+        eyesTimer.isPaused || waterTimer.isPaused || standupTimer.isPaused
+    }
+    
     init(appState: AppState) {
         self.appState = appState
         self.eyesTimer = SingleReminderTimer(type: .eyes, appState: appState)
         self.waterTimer = SingleReminderTimer(type: .water, appState: appState)
         self.standupTimer = SingleReminderTimer(type: .standup, appState: appState)
+        
+        // Set manager reference for all timers
+        self.eyesTimer.setManager(self)
+        self.waterTimer.setManager(self)
+        self.standupTimer.setManager(self)
     }
     
     func start() {
@@ -98,6 +132,14 @@ class MultiReminderManager: ObservableObject {
         eyesTimer.start()
         waterTimer.start()
         standupTimer.start()
+    }
+    
+    func pause() {
+        isRunning = false
+        
+        eyesTimer.pause()
+        waterTimer.pause()
+        standupTimer.pause()
     }
     
     func stop() {

@@ -44,8 +44,8 @@ struct MenuBarView: View {
             
             Divider()
             
-            // Timers Status
-            if multiReminderManager.isRunning {
+            // Timers Status - Show when running or paused (hide only when stopped)
+            if multiReminderManager.isRunning || multiReminderManager.isPaused {
                 VStack(spacing: 0) {
                     TimerStatusRow(
                         type: .eyes,
@@ -72,31 +72,107 @@ struct MenuBarView: View {
             
             // Controls
             VStack(spacing: 0) {
-                Button(action: {
-                    if multiReminderManager.isRunning {
-                        multiReminderManager.stop()
-                    } else {
+                // Show Start button only when completely stopped
+                if !multiReminderManager.isRunning && !multiReminderManager.isPaused {
+                    Button(action: {
                         multiReminderManager.start()
+                    }) {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("Start All")
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
                     }
-                }) {
-                    HStack {
-                        Image(systemName: multiReminderManager.isRunning ? "pause.fill" : "play.fill")
-                        Text(multiReminderManager.isRunning ? "Pause All" : "Start All")
-                        Spacer()
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.clear)
+                    .onHover { isHovered in
+                        if isHovered {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
                     }
-                    .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(Color.clear)
-                .onHover { isHovered in
-                    if isHovered {
-                        NSCursor.pointingHand.push()
-                    } else {
-                        NSCursor.pop()
+                
+                // Show Pause button when running
+                if multiReminderManager.isRunning {
+                    Button(action: {
+                        multiReminderManager.pause()
+                    }) {
+                        HStack {
+                            Image(systemName: "pause.fill")
+                            Text("Pause All")
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.clear)
+                    .onHover { isHovered in
+                        if isHovered {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
                     }
                 }
+                
+                // Show Resume button when paused
+                if !multiReminderManager.isRunning && multiReminderManager.isPaused {
+                    Button(action: {
+                        multiReminderManager.start()
+                    }) {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("Resume All")
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.clear)
+                    .onHover { isHovered in
+                        if isHovered {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
+                    }
+                }
+                
+                // Show Stop button when running or paused (not when stopped)
+                if multiReminderManager.isRunning || multiReminderManager.isPaused {
+                    Button(action: {
+                        multiReminderManager.stop()
+                    }) {
+                        HStack {
+                            Image(systemName: "stop.fill")
+                            Text("Stop All")
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.clear)
+                    .onHover { isHovered in
+                        if isHovered {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
+                    }
+                }
+                
+                Divider()
                 
                 Button(action: {
                     openSettingsWindow()

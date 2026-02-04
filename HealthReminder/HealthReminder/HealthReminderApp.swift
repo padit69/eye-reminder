@@ -64,9 +64,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         appState.$showingReminder
             .sink { [weak self] showingReminder in
                 Task { @MainActor in
-                    if showingReminder {
+                    // Only show reminder if manager is actually running
+                    if showingReminder && multiReminderManager.isRunning {
                         self?.showReminderOverlay(appState: appState, multiReminderManager: multiReminderManager)
-                    } else {
+                    } else if !showingReminder {
                         self?.hideReminderOverlay()
                     }
                 }
