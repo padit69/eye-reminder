@@ -12,17 +12,17 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 echo ""
-echo "🔨 Testing Eye Reminder Build..."
+echo "🔨 Testing Health Reminder Build..."
 echo ""
 
-# Navigate to EyeReminder directory
-cd "$(dirname "$0")/../EyeReminder"
+# Navigate to HealthReminder directory
+cd "$(dirname "$0")/../HealthReminder"
 
 # Clean and build
 echo -e "${BLUE}ℹ️  Cleaning previous builds...${NC}"
 xcodebuild \
-  -project EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+  -project HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Release \
   -derivedDataPath ./build \
   clean
@@ -30,21 +30,21 @@ xcodebuild \
 echo ""
 echo -e "${BLUE}ℹ️  Building app...${NC}"
 xcodebuild \
-  -project EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+  -project HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Release \
   -derivedDataPath ./build \
   build
 
 # Check if build succeeded
-if [ -d "build/Build/Products/Release/EyeReminder.app" ]; then
+if [ -d "build/Build/Products/Release/HealthReminder.app" ]; then
     echo ""
     echo -e "${GREEN}✅ Build successful!${NC}"
     echo ""
     echo "Build output:"
-    ls -lh build/Build/Products/Release/EyeReminder.app
+    ls -lh build/Build/Products/Release/HealthReminder.app
     echo ""
-    echo "App size: $(du -sh build/Build/Products/Release/EyeReminder.app | cut -f1)"
+    echo "App size: $(du -sh build/Build/Products/Release/HealthReminder.app | cut -f1)"
     echo ""
 else
     echo ""

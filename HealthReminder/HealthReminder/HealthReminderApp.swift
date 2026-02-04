@@ -1,6 +1,6 @@
 //
-//  EyeReminderApp.swift
-//  EyeReminder
+//  HealthReminderApp.swift
+//  HealthReminder
 //
 //  Created by Dũng Phùng on 3/2/26.
 //
@@ -10,7 +10,7 @@ import AppKit
 import Combine
 
 @main
-struct EyeReminderApp: App {
+struct HealthReminderApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState.shared
     @StateObject private var timerManager: TimerManager

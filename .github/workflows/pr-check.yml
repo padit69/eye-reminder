@@ -24,10 +24,10 @@ jobs:
       - name: Build check
         id: build
         run: |
-          cd EyeReminder
+          cd HealthReminder
           xcodebuild \
-            -project EyeReminder.xcodeproj \
-            -scheme EyeReminder \
+            -project HealthReminder.xcodeproj \
+            -scheme HealthReminder \
             -configuration Debug \
             -derivedDataPath ./build \
             CODE_SIGN_IDENTITY="" \
@@ -37,7 +37,7 @@ jobs:
       
       - name: Verify build output
         run: |
-          if [ -d "EyeReminder/build/Build/Products/Debug/EyeReminder.app" ]; then
+          if [ -d "HealthReminder/build/Build/Products/Debug/HealthReminder.app" ]; then
             echo "✅ Build successful"
             echo "BUILD_STATUS=success" >> $GITHUB_ENV
           else

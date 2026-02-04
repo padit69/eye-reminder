@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Eye Reminder Release Script
+# Health Reminder Release Script
 # This script automates the release process
 
 set -e  # Exit on error
@@ -86,11 +86,11 @@ check_branch_sync() {
 # Function to test build locally
 test_build() {
     print_info "Testing build locally..."
-    cd EyeReminder
+    cd HealthReminder
     
     if xcodebuild \
-        -project EyeReminder.xcodeproj \
-        -scheme EyeReminder \
+        -project HealthReminder.xcodeproj \
+        -scheme HealthReminder \
         -configuration Release \
         -derivedDataPath ./build \
         clean build > /dev/null 2>&1; then
@@ -133,12 +133,12 @@ create_release() {
 main() {
     echo ""
     echo "╔═══════════════════════════════════════╗"
-    echo "║   Eye Reminder Release Script 👁️     ║"
+    echo "║  Health Reminder Release Script 💚   ║"
     echo "╚═══════════════════════════════════════╝"
     echo ""
     
     # Check if we're in the right directory
-    if [ ! -d "EyeReminder/EyeReminder.xcodeproj" ]; then
+    if [ ! -d "HealthReminder/HealthReminder.xcodeproj" ]; then
         print_error "This script must be run from the project root directory"
         exit 1
     fi

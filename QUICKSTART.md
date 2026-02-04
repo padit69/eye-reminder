@@ -1,12 +1,12 @@
-# Quick Start Guide - Eye Reminder
+# Quick Start Guide - Health Reminder
 
 ## 🚀 Getting Started (5 minutes)
 
 ### 1. Open the Project in Xcode
 
 ```bash
-cd /Users/dungne/SourceCode/eye-reminder/EyeReminder
-open EyeReminder.xcodeproj
+cd /Users/dungne/SourceCode/health-reminder/HealthReminder
+open HealthReminder.xcodeproj
 ```
 
 ### 2. Run the App
@@ -85,9 +85,9 @@ For quick testing during development:
 
 ```bash
 # Build and run from terminal
-cd /Users/dungne/SourceCode/eye-reminder/EyeReminder
-xcodebuild -project EyeReminder.xcodeproj -scheme EyeReminder -configuration Debug build
-open /Users/dungne/Library/Developer/Xcode/DerivedData/EyeReminder-*/Build/Products/Debug/EyeReminder.app
+cd /Users/dungne/SourceCode/health-reminder/HealthReminder
+xcodebuild -project HealthReminder.xcodeproj -scheme HealthReminder -configuration Debug build
+open /Users/dungne/Library/Developer/Xcode/DerivedData/HealthReminder-*/Build/Products/Debug/HealthReminder.app
 ```
 
 Set interval to 10 seconds and duration to 5 seconds for rapid testing.

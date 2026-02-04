@@ -22,10 +22,10 @@ jobs:
       
       - name: Build app
         run: |
-          cd EyeReminder
+          cd HealthReminder
           xcodebuild \
-            -project EyeReminder.xcodeproj \
-            -scheme EyeReminder \
+            -project HealthReminder.xcodeproj \
+            -scheme HealthReminder \
             -configuration Release \
             -derivedDataPath ./build \
             CODE_SIGN_IDENTITY="" \
@@ -36,11 +36,11 @@ jobs:
       - name: Check build output
         run: |
           echo "✅ Build completed successfully!"
-          ls -la EyeReminder/build/Build/Products/Release/
+          ls -la HealthReminder/build/Build/Products/Release/
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: EyeReminder-Build-${{ github.sha }}
-          path: EyeReminder/build/Build/Products/Release/EyeReminder.app
+          name: HealthReminder-Build-${{ github.sha }}
+          path: HealthReminder/build/Build/Products/Release/HealthReminder.app
           retention-days: 7

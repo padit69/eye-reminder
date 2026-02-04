@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create DMG Script
-# Creates a DMG installer for the Eye Reminder app
+# Creates a DMG installer for the Health Reminder app
 
 set -e
 
@@ -13,11 +13,11 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo ""
-echo "📦 Creating DMG Installer for Eye Reminder..."
+echo "📦 Creating DMG Installer for Health Reminder..."
 echo ""
 
 # Check if app exists
-APP_PATH="EyeReminder/build/Build/Products/Release/EyeReminder.app"
+APP_PATH="HealthReminder/build/Build/Products/Release/HealthReminder.app"
 
 if [ ! -d "$APP_PATH" ]; then
     echo -e "${RED}❌ App not found at: $APP_PATH${NC}"
@@ -29,7 +29,7 @@ fi
 # Get version from arguments or use default
 VERSION=${1:-"1.0.0"}
 OUTPUT_DIR="dist"
-DMG_NAME="EyeReminder-v${VERSION}.dmg"
+DMG_NAME="HealthReminder-v${VERSION}.dmg"
 
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
@@ -51,7 +51,7 @@ ln -s /Applications "$TMP_DIR/Applications"
 
 # Create DMG
 hdiutil create \
-  -volname "Eye Reminder $VERSION" \
+  -volname "Health Reminder $VERSION" \
   -srcfolder "$TMP_DIR" \
   -ov \
   -format UDZO \

@@ -30,10 +30,10 @@ jobs:
       
       - name: Build app
         run: |
-          cd EyeReminder
+          cd HealthReminder
           xcodebuild \
-            -project EyeReminder.xcodeproj \
-            -scheme EyeReminder \
+            -project HealthReminder.xcodeproj \
+            -scheme HealthReminder \
             -configuration Release \
             -derivedDataPath ./build \
             CODE_SIGN_IDENTITY="" \
@@ -44,8 +44,8 @@ jobs:
       - name: Verify build
         run: |
           echo "Checking build output..."
-          ls -la EyeReminder/build/Build/Products/Release/
-          if [ -d "EyeReminder/build/Build/Products/Release/EyeReminder.app" ]; then
+          ls -la HealthReminder/build/Build/Products/Release/
+          if [ -d "HealthReminder/build/Build/Products/Release/HealthReminder.app" ]; then
             echo "✅ App bundle created successfully"
           else
             echo "❌ App bundle not found"
@@ -54,28 +54,28 @@ jobs:
       
       - name: Package app as ZIP
         run: |
-          cd EyeReminder/build/Build/Products/Release
+          cd HealthReminder/build/Build/Products/Release
           
           # Create a clean directory for the app
-          mkdir -p EyeReminder-${{ steps.get_version.outputs.VERSION }}
-          cp -R EyeReminder.app EyeReminder-${{ steps.get_version.outputs.VERSION }}/
+          mkdir -p HealthReminder-${{ steps.get_version.outputs.VERSION }}
+          cp -R HealthReminder.app HealthReminder-${{ steps.get_version.outputs.VERSION }}/
           
           # Create ZIP archive
-          zip -r -y EyeReminder-${{ steps.get_version.outputs.VERSION }}.zip EyeReminder-${{ steps.get_version.outputs.VERSION }}
+          zip -r -y HealthReminder-${{ steps.get_version.outputs.VERSION }}.zip HealthReminder-${{ steps.get_version.outputs.VERSION }}
           
           # Move to artifacts directory
           mkdir -p ../../../../artifacts
-          mv EyeReminder-${{ steps.get_version.outputs.VERSION }}.zip ../../../../artifacts/
+          mv HealthReminder-${{ steps.get_version.outputs.VERSION }}.zip ../../../../artifacts/
           
           echo "✅ ZIP package created"
       
       - name: Create DMG installer
         run: |
-          cd EyeReminder/build/Build/Products/Release
+          cd HealthReminder/build/Build/Products/Release
           
           # Create temporary directory for DMG contents
           mkdir -p dmg_contents
-          cp -R EyeReminder.app dmg_contents/
+          cp -R HealthReminder.app dmg_contents/
           
           # Create Applications symlink for easy installation
           ln -s /Applications dmg_contents/Applications
@@ -84,17 +84,17 @@ jobs:
           hdiutil create -volname "Eye Reminder ${{ steps.get_version.outputs.VERSION }}" \
             -srcfolder dmg_contents \
             -ov -format UDZO \
-            EyeReminder-${{ steps.get_version.outputs.VERSION }}.dmg
+            HealthReminder-${{ steps.get_version.outputs.VERSION }}.dmg
           
-          mv EyeReminder-${{ steps.get_version.outputs.VERSION }}.dmg ../../../../artifacts/
+          mv HealthReminder-${{ steps.get_version.outputs.VERSION }}.dmg ../../../../artifacts/
           
           echo "✅ DMG installer created"
       
       - name: Generate checksums
         run: |
-          cd EyeReminder/artifacts
-          shasum -a 256 EyeReminder-${{ steps.get_version.outputs.VERSION }}.zip > checksums.txt
-          shasum -a 256 EyeReminder-${{ steps.get_version.outputs.VERSION }}.dmg >> checksums.txt
+          cd HealthReminder/artifacts
+          shasum -a 256 HealthReminder-${{ steps.get_version.outputs.VERSION }}.zip > checksums.txt
+          shasum -a 256 HealthReminder-${{ steps.get_version.outputs.VERSION }}.dmg >> checksums.txt
           cat checksums.txt
       
       - name: Generate release notes
@@ -108,13 +108,13 @@ jobs:
           ### 📦 Installation
           
           **Option 1: DMG Installer (Recommended)**
-          1. Download `EyeReminder-${{ steps.get_version.outputs.VERSION }}.dmg`
+          1. Download `HealthReminder-${{ steps.get_version.outputs.VERSION }}.dmg`
           2. Open the DMG file
           3. Drag Eye Reminder to your Applications folder
           4. Launch from Applications
           
           **Option 2: ZIP Archive**
-          1. Download `EyeReminder-${{ steps.get_version.outputs.VERSION }}.zip`
+          1. Download `HealthReminder-${{ steps.get_version.outputs.VERSION }}.zip`
           2. Extract the archive
           3. Move Eye Reminder.app to your Applications folder
           4. Launch from Applications
@@ -143,7 +143,7 @@ jobs:
           ### 📝 Checksums
           
           ```
-          $(cat EyeReminder/artifacts/checksums.txt)
+          $(cat HealthReminder/artifacts/checksums.txt)
           ```
           
           ### 🐛 Known Issues
@@ -166,9 +166,9 @@ jobs:
           draft: false
           prerelease: ${{ contains(steps.get_version.outputs.VERSION, 'alpha') || contains(steps.get_version.outputs.VERSION, 'beta') || contains(steps.get_version.outputs.VERSION, 'rc') }}
           files: |
-            EyeReminder/artifacts/EyeReminder-${{ steps.get_version.outputs.VERSION }}.zip
-            EyeReminder/artifacts/EyeReminder-${{ steps.get_version.outputs.VERSION }}.dmg
-            EyeReminder/artifacts/checksums.txt
+            HealthReminder/artifacts/HealthReminder-${{ steps.get_version.outputs.VERSION }}.zip
+            HealthReminder/artifacts/HealthReminder-${{ steps.get_version.outputs.VERSION }}.dmg
+            HealthReminder/artifacts/checksums.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       

@@ -1,6 +1,6 @@
 # 🎉 GitHub Actions CI/CD Setup Complete!
 
-Your Eye Reminder project is now configured for automated builds and releases on GitHub!
+Your Health Reminder project is now configured for automated builds and releases on GitHub!
 
 ## 📦 What Was Created
 
@@ -122,13 +122,13 @@ Added references to:
    If you haven't already, initialize Git and push to GitHub:
 
    ```bash
-   cd /Users/dungne/SourceCode/eye-reminder
+   cd /Users/dungne/SourceCode/health-reminder
    git init
    git add .
    git commit -m "Initial commit with CI/CD setup"
    
    # Create GitHub repository, then:
-   git remote add origin https://github.com/YOUR_USERNAME/eye-reminder.git
+   git remote add origin https://github.com/YOUR_USERNAME/health-reminder.git
    git branch -M main
    git push -u origin main
    ```
@@ -143,7 +143,7 @@ Added references to:
 3. **Test the Build Workflow**
 
    The build workflow will run automatically on your first push!
-   Monitor it at: `https://github.com/YOUR_USERNAME/eye-reminder/actions`
+   Monitor it at: `https://github.com/YOUR_USERNAME/health-reminder/actions`
 
 ### Creating Your First Release
 
@@ -180,9 +180,9 @@ git push origin v1.0.0
 
 **Monitor the Release**
 
-1. Go to: `https://github.com/YOUR_USERNAME/eye-reminder/actions`
+1. Go to: `https://github.com/YOUR_USERNAME/health-reminder/actions`
 2. Watch the "Release" workflow (takes 5-10 minutes)
-3. Once complete, visit: `https://github.com/YOUR_USERNAME/eye-reminder/releases`
+3. Once complete, visit: `https://github.com/YOUR_USERNAME/health-reminder/releases`
 
 ---
 
@@ -264,7 +264,7 @@ git push origin v1.0.0
 ## 📁 File Structure
 
 ```
-eye-reminder/
+health-reminder/
 ├── .github/
 │   └── workflows/
 │       ├── build.yml           # CI build workflow
@@ -275,7 +275,7 @@ eye-reminder/
 │   ├── test-build.sh           # Build test script
 │   ├── create-dmg.sh           # DMG creator script
 │   └── README.md               # Scripts documentation
-├── EyeReminder/                # Your app source code
+├── HealthReminder/             # Your app source code
 ├── .gitignore                  # Git ignore patterns
 ├── GITHUB_ACTIONS_SETUP.md     # Detailed CI/CD documentation
 ├── RELEASE.md                  # Release guide
@@ -335,7 +335,7 @@ For distribution outside development:
 chmod +x scripts/*.sh
 
 # Run from project root
-cd /Users/dungne/SourceCode/eye-reminder
+cd /Users/dungne/SourceCode/health-reminder
 ./scripts/release.sh
 ```
 

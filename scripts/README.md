@@ -84,7 +84,7 @@ Or specify version directly:
 - App must be built first (run `test-build.sh`)
 
 **Output:**
-- File: `dist/EyeReminder-vX.X.X.dmg`
+- File: `dist/HealthReminder-vX.X.X.dmg`
 
 ---
 
@@ -126,7 +126,7 @@ Or specify version directly:
 ./scripts/create-dmg.sh 1.0.0
 
 # 3. Distribute
-# Share the dist/EyeReminder-v1.0.0.dmg file
+# Share the dist/HealthReminder-v1.0.0.dmg file
 ```
 
 ---
@@ -165,7 +165,7 @@ chmod +x scripts/script-name.sh
 Make sure you're in the project root:
 
 ```bash
-cd /Users/dungne/SourceCode/eye-reminder
+cd /Users/dungne/SourceCode/health-reminder
 ./scripts/script-name.sh
 ```
 
@@ -190,9 +190,9 @@ set -e  # Exit on error
 echo "Hello from custom script"
 
 # Example: Build and open app
-cd EyeReminder
-xcodebuild -project EyeReminder.xcodeproj -scheme EyeReminder build
-open build/Build/Products/Debug/EyeReminder.app
+cd HealthReminder
+xcodebuild -project HealthReminder.xcodeproj -scheme HealthReminder build
+open build/Build/Products/Debug/HealthReminder.app
 ```
 
 Make it executable:

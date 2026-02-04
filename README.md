@@ -159,13 +159,13 @@ Configure each reminder type independently:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/eye-reminder.git
-   cd eye-reminder
+git clone https://github.com/yourusername/health-reminder.git
+cd health-reminder
    ```
 
 2. **Open in Xcode**
    ```bash
-   open EyeReminder/EyeReminder.xcodeproj
+   open HealthReminder/HealthReminder.xcodeproj
    ```
 
 3. **Configure signing**
@@ -205,14 +205,14 @@ This builds, archives, and prepares a release with all assets.
 
 ```bash
 # Debug build
-xcodebuild -project EyeReminder/EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+xcodebuild -project HealthReminder/HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Debug \
   build
 
 # Release build
-xcodebuild -project EyeReminder/EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+xcodebuild -project HealthReminder/HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Release \
   -derivedDataPath ./build \
   build
@@ -221,10 +221,10 @@ xcodebuild -project EyeReminder/EyeReminder.xcodeproj \
 **Archive for distribution:**
 
 ```bash
-xcodebuild -project EyeReminder/EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+xcodebuild -project HealthReminder/HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Release \
-  -archivePath ./build/EyeReminder.xcarchive \
+  -archivePath ./build/HealthReminder.xcarchive \
   archive
 ```
 
@@ -271,7 +271,7 @@ The app is built with SwiftUI and follows Apple's design patterns for modern mac
 ## Key Components
 
 ### Core Application
-- **`EyeReminderApp.swift`** - Main app entry point and scene configuration with SwiftUI lifecycle
+- **`HealthReminderApp.swift`** - Main app entry point and scene configuration with SwiftUI lifecycle
 - **`AppState.swift`** - Global application state management with published properties for reactive updates
 
 ### Timer & Reminder Management

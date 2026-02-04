@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		6EB617332F31127700B3A78E /* EyeReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB617332F31127700B3A78E /* HealthReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6EB617352F31127700B3A78E /* EyeReminder */ = {
+		6EB617352F31127700B3A78E /* HealthReminder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EyeReminder;
+			path = HealthReminder;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		6EB6172A2F31127700B3A78E = {
 			isa = PBXGroup;
 			children = (
-				6EB617352F31127700B3A78E /* EyeReminder */,
+				6EB617352F31127700B3A78E /* HealthReminder */,
 				6EB617342F31127700B3A78E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		6EB617342F31127700B3A78E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EB617332F31127700B3A78E /* EyeReminder.app */,
+				6EB617332F31127700B3A78E /* HealthReminder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6EB617322F31127700B3A78E /* EyeReminder */ = {
+		6EB617322F31127700B3A78E /* HealthReminder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EB617402F31127800B3A78E /* Build configuration list for PBXNativeTarget "EyeReminder" */;
+			buildConfigurationList = 6EB617402F31127800B3A78E /* Build configuration list for PBXNativeTarget "HealthReminder" */;
 			buildPhases = (
 				6EB6172F2F31127700B3A78E /* Sources */,
 				6EB617302F31127700B3A78E /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				6EB617352F31127700B3A78E /* EyeReminder */,
+				6EB617352F31127700B3A78E /* HealthReminder */,
 			);
-			name = EyeReminder;
+			name = HealthReminder;
 			packageProductDependencies = (
 			);
-			productName = EyeReminder;
-			productReference = 6EB617332F31127700B3A78E /* EyeReminder.app */;
+			productName = HealthReminder;
+			productReference = 6EB617332F31127700B3A78E /* HealthReminder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6EB6172E2F31127700B3A78E /* Build configuration list for PBXProject "EyeReminder" */;
+			buildConfigurationList = 6EB6172E2F31127700B3A78E /* Build configuration list for PBXProject "HealthReminder" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6EB617322F31127700B3A78E /* EyeReminder */,
+				6EB617322F31127700B3A78E /* HealthReminder */,
 			);
 		};
 /* End PBXProject section */
@@ -266,7 +266,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ohoo.no.eye.EyeReminder;
+				PRODUCT_BUNDLE_IDENTIFIER = ohoo.no.eye.HealthReminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -299,7 +299,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ohoo.no.eye.EyeReminder;
+				PRODUCT_BUNDLE_IDENTIFIER = ohoo.no.eye.HealthReminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -314,7 +314,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6EB6172E2F31127700B3A78E /* Build configuration list for PBXProject "EyeReminder" */ = {
+		6EB6172E2F31127700B3A78E /* Build configuration list for PBXProject "HealthReminder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EB6173E2F31127800B3A78E /* Debug */,
@@ -323,7 +323,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EB617402F31127800B3A78E /* Build configuration list for PBXNativeTarget "EyeReminder" */ = {
+		6EB617402F31127800B3A78E /* Build configuration list for PBXNativeTarget "HealthReminder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EB617412F31127800B3A78E /* Debug */,

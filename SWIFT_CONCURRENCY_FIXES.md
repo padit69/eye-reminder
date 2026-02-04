@@ -112,9 +112,9 @@ appState.$showingReminder
 
 ### Methods with @MainActor
 
-1. **AppDelegate.setupObservers()** (`EyeReminderApp.swift`)
-2. **AppDelegate.showReminderOverlay()** (`EyeReminderApp.swift`)
-3. **AppDelegate.hideReminderOverlay()** (`EyeReminderApp.swift`)
+1. **AppDelegate.setupObservers()** (`HealthReminderApp.swift`)
+2. **AppDelegate.showReminderOverlay()** (`HealthReminderApp.swift`)
+3. **AppDelegate.hideReminderOverlay()** (`HealthReminderApp.swift`)
 
 ### Why These Annotations Are Needed
 
@@ -133,10 +133,10 @@ appState.$showingReminder
 Test with the same flags as CI:
 
 ```bash
-cd EyeReminder
+cd HealthReminder
 xcodebuild \
-  -project EyeReminder.xcodeproj \
-  -scheme EyeReminder \
+  -project HealthReminder.xcodeproj \
+  -scheme HealthReminder \
   -configuration Release \
   -derivedDataPath ./build \
   CODE_SIGN_IDENTITY="" \
@@ -253,10 +253,10 @@ If you encounter new concurrency errors:
 
 ```bash
 # Check latest build
-open https://github.com/padit69/eye-reminder/actions
+open https://github.com/padit69/health-reminder/actions
 
 # Test locally
-cd /Users/dungne/SourceCode/eye-reminder
+cd /Users/dungne/SourceCode/health-reminder
 ./scripts/test-build.sh
 ```
 

@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  EyeReminder
+//  HealthReminder
 //
 //  Created by Dũng Phùng on 3/2/26.
 //
