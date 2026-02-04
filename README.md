@@ -2,7 +2,7 @@
 
 A gentle macOS menu bar application that reminds you to rest your eyes at regular intervals, following the 20-20-20 rule recommended by eye care professionals.
 
-## Features
+## Features 
 
 ✨ **Menu Bar App** - Lives in your menu bar, always accessible but never intrusive
 
