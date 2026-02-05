@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "releaseDate": "2026-02-05",
+  "downloadURL": "https://github.com/yourusername/health-reminder/releases/download/v1.0.0/HealthReminder.dmg",
+  "releaseNotes": "Initial release",
+  "minimumOSVersion": "13.0"
+}

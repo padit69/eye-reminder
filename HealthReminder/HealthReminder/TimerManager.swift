@@ -49,19 +49,17 @@ class TimerManager: ObservableObject {
         timeRemaining = intervalSeconds
     }
     
+    @MainActor
     private func startCountdown() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                guard let self = self else { return }
-                
-                if self.timeRemaining > 0 {
-                    self.timeRemaining -= 1
-                } else {
-                    self.triggerReminder()
-                }
+        Task {
+            while timeRemaining > 0 {
+                try await Task.sleep(for: .seconds(1))
+                timeRemaining -= 1
             }
+            triggerReminder()
         }
     }
+    
     
     private func triggerReminder() {
         appState.showingReminder = true

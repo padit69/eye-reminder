@@ -15,6 +15,7 @@ struct HealthReminderApp: App {
     @StateObject private var appState = AppState.shared
     @StateObject private var timerManager: TimerManager
     @StateObject private var multiReminderManager: MultiReminderManager
+    @StateObject private var updateChecker = UpdateChecker()
     
     init() {
         let state = AppState.shared
@@ -29,11 +30,15 @@ struct HealthReminderApp: App {
                 timerManager: timerManager,
                 multiReminderManager: multiReminderManager
             )
+            .environmentObject(updateChecker)
             .onAppear {
                 appDelegate.appState = appState
                 appDelegate.timerManager = timerManager
                 appDelegate.multiReminderManager = multiReminderManager
                 appDelegate.setupObservers()
+                
+                // Check for updates on launch
+                updateChecker.checkForUpdatesOnLaunch()
             }
         } label: {
             Image(systemName: "eye.fill")

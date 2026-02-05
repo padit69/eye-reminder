@@ -104,16 +104,66 @@ test_build() {
     fi
 }
 
+# Function to update version.json
+update_version_json() {
+    local version=$1
+    local message=$2
+    
+    # Remove 'v' prefix from version
+    local clean_version=${version#v}
+    
+    # Get today's date
+    local today=$(date +%Y-%m-%d)
+    
+    # Get repository info for download URL
+    local repo_url=$(git config --get remote.origin.url | sed 's/\.git$//')
+    if [[ $repo_url == git@github.com:* ]]; then
+        repo_url=$(echo $repo_url | sed 's/git@github.com:/https:\/\/github.com\//')
+    fi
+    
+    # Extract user/repo from URL
+    local download_url="${repo_url}/releases/download/${version}/HealthReminder.dmg"
+    
+    # Check if jq is installed
+    if ! command -v jq &> /dev/null; then
+        print_warning "jq not found, skipping version.json update"
+        print_info "Install jq with: brew install jq"
+        return 0
+    fi
+    
+    # Update version.json
+    if [ -f "version.json" ]; then
+        print_info "Updating version.json..."
+        jq --arg version "$clean_version" \
+           --arg date "$today" \
+           --arg url "$download_url" \
+           --arg notes "$message" \
+           '.version = $version | .releaseDate = $date | .downloadURL = $url | .releaseNotes = $notes' \
+           version.json > version.json.tmp && mv version.json.tmp version.json
+        
+        # Commit the change
+        git add version.json
+        git commit -m "chore: update version.json to $clean_version"
+        print_success "version.json updated and committed"
+    else
+        print_warning "version.json not found, skipping update"
+    fi
+}
+
 # Function to create and push tag
 create_release() {
     local version=$1
     local message=$2
     
+    # Update version.json before creating tag
+    update_version_json "$version" "$message"
+    
     # Create tag
     git tag -a "$version" -m "$message"
     print_success "Tag $version created locally"
     
-    # Push tag
+    # Push commits and tag
+    git push origin main
     git push origin "$version"
     print_success "Tag $version pushed to GitHub"
     
@@ -153,6 +203,13 @@ main() {
     if ! command -v xcodebuild &> /dev/null; then
         print_error "Xcode is not installed"
         exit 1
+    fi
+    
+    # Check if jq is available (optional but recommended)
+    if ! command -v jq &> /dev/null; then
+        print_warning "jq is not installed (version.json will not be updated)"
+        print_info "Install with: brew install jq"
+        echo ""
     fi
     
     # Get version from user

@@ -12,6 +12,7 @@ struct MenuBarView: View {
     @ObservedObject var appState: AppState
     @ObservedObject var timerManager: TimerManager
     @ObservedObject var multiReminderManager: MultiReminderManager
+    @EnvironmentObject var updateChecker: UpdateChecker
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -235,6 +236,7 @@ struct MenuBarView: View {
             } else {
                 // Create new settings window
                 let settingsView = SettingsView(appState: appState, timerManager: timerManager)
+                    .environmentObject(updateChecker)
                 let hostingController = NSHostingController(rootView: settingsView)
                 
                 let window = NSWindow(contentViewController: hostingController)

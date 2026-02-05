@@ -583,6 +583,8 @@ struct AdvancedSettingsView: View {
 
 // MARK: - About View
 struct AboutView: View {
+    @EnvironmentObject var updateChecker: UpdateChecker
+    
     var body: some View {
         Form {
             Section {
@@ -654,6 +656,48 @@ struct AboutView: View {
             }
             
             Section {
+                Button(action: {
+                    Task {
+                        await updateChecker.checkForUpdates(silent: false)
+                    }
+                }) {
+                    LabeledContent {
+                        HStack(spacing: 6) {
+                            if updateChecker.isCheckingForUpdates {
+                                ProgressView()
+                                    .controlSize(.small)
+                                    .scaleEffect(0.7)
+                            } else if updateChecker.updateAvailable {
+                                Image(systemName: "arrow.down.circle.fill")
+                                    .font(.system(size: 13))
+                                    .foregroundStyle(.green.gradient)
+                            } else {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    } label: {
+                        Label("Check for Updates", systemImage: "arrow.down.circle")
+                            .font(.system(size: 13))
+                    }
+                }
+                .buttonStyle(.plain)
+                .disabled(updateChecker.isCheckingForUpdates)
+            } header: {
+                Text("Updates")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(.secondary)
+                    .textCase(.uppercase)
+            } footer: {
+                if let error = updateChecker.errorMessage {
+                    Text(error)
+                        .font(.system(size: 11))
+                        .foregroundColor(updateChecker.updateAvailable ? .secondary : .green)
+                }
+            }
+            
+            Section {
                 Link(destination: URL(string: "https://github.com")!) {
                     LabeledContent {
                         Image(systemName: "arrow.up.forward.square")
@@ -683,6 +727,16 @@ struct AboutView: View {
             }
         }
         .formStyle(.grouped)
+        .alert("Update Available", isPresented: $updateChecker.showUpdateAlert) {
+            Button("Download") {
+                updateChecker.downloadUpdate()
+            }
+            Button("Later", role: .cancel) {}
+        } message: {
+            if let version = updateChecker.latestVersion {
+                Text("Version \(version.version) is now available.\n\n\(version.releaseNotes)")
+            }
+        }
     }
 }
 
