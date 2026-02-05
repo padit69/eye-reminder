@@ -26,7 +26,7 @@ class UpdateChecker: ObservableObject {
     @Published var errorMessage: String?
     
     // Update endpoint URL - you can change this to your own server or GitHub releases
-    private let updateURL = "https://raw.githubusercontent.com/yourusername/health-reminder/main/version.json"
+    private let updateURL = "https://raw.githubusercontent.com/padit69/health-reminder/main/version.json"
     
     // Current app version from Info.plist
     var currentVersion: String {
